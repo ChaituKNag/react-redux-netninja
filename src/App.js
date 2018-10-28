@@ -1,40 +1,47 @@
 import React, { Component } from "react";
 
-import Ninjas from "./Ninjas";
-import AddNinja from "./AddNinja";
-
+import Todos from "./Todos";
+import AddTodo from "./AddTodo";
 class App extends Component {
 	state = {
-		ninjas: [
-			{ name: "Ryu", age: 30, belt: "black", id: 1 },
-			{ name: "Yoshi", age: 25, belt: "green", id: 2 },
-			{ name: "Crystal", age: 20, belt: "pink", id: 3 }
+		todos: [
+			{
+				id: 1,
+				content: "buy some milk"
+			},
+			{
+				id: 2,
+				content: "play mario kart"
+			}
 		]
 	};
 
-	addNinja(ninja) {
+	addTodo(content) {
 		this.setState({
-			ninjas: [
-				...this.state.ninjas,
-				{ ...ninja, id: this.state.ninjas.length + 1 }
+			todos: [
+				...this.state.todos,
+				{
+					id: this.state.todos.length + 1,
+					content
+				}
 			]
 		});
 	}
 
-	deleteNinja(id) {
+	deleteTodo(id) {
 		this.setState({
-			ninjas: this.state.ninjas.filter(ninja => ninja.id !== id)
+			todos: this.state.todos.filter(todo => todo.id !== id)
 		});
 	}
+
 	render() {
 		return (
-			<div className="App">
-				<h1>My first React App</h1>
-				<p>Welcome</p>
-				<AddNinja onNinjaAdd={this.addNinja.bind(this)} />
-				<Ninjas
-					ninjas={this.state.ninjas}
-					deleteNinja={this.deleteNinja.bind(this)}
+			<div className="Todo-App container">
+				<h1 className="center blue-text">Todo's</h1>
+				<AddTodo onAddTodo={this.addTodo.bind(this)} />
+				<Todos
+					todos={this.state.todos}
+					deleteTodo={this.deleteTodo.bind(this)}
 				/>
 			</div>
 		);
