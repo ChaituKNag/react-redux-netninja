@@ -1,21 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import http from "axios";
+import { connect } from 'react-redux';
 
-export default class Home extends Component {
-	state = {
-		posts: []
-	};
-	componentDidMount() {
-		http.get(`https://jsonplaceholder.typicode.com/posts`).then(response => {
-			console.log(response);
-			this.setState({
-				posts: response.data.slice(0, 10)
-			});
-		});
-	}
+class Home extends Component {
+	
 	render() {
-		const { posts } = this.state;
+		const { posts } = this.props;
+		console.log(posts);
 		const postList = posts.length ? (
 			posts.map(post => (
 				<div className="post card" key={post.id}>
@@ -38,3 +29,11 @@ export default class Home extends Component {
 		);
 	}
 }
+
+const mapStateToProps = (state) => {
+	return {
+		posts: state.posts
+	}
+}
+
+export default connect(mapStateToProps)(Home);

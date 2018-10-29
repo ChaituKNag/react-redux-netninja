@@ -1,0 +1,7 @@
+{
+	"workbench.editor.showTabs": true,
+	"editor.renderWhitespace": "all",
+	"prettier.useTabs": true,
+	"editor.formatOnSave": true,
+	"html.format.enable": true
+}
